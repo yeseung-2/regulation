@@ -1,0 +1,67 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# PDF 파일 무시
+*.pdf
+
+# JSON 결과물(예: LangChain 등에서 생성)
+*.json
+
+# 파이썬 캐시
+__pycache__/
+*.py[cod]
+*.pkl
+
+# Jupyter notebook 체크포인트
+.ipynb_checkpoints/
+
+# 환경 변수 파일
+.env
+.env.*
+
+# VSCode 워크스페이스 설정 파일
+*.code-workspace
+
+# 기타 불필요한 추적 방지용
+*.db
+*.sqlite3
+*.csv
+*.tsv
+
+# frontend 관련 무시
+/frontend/node_modules/
+/frontend/dist/
+/frontend/.next/
+*.log
+
+# backend 관련 무시
+/backend/__pycache__/
+/backend/*.pyc
+
+# 가상환경 무시
+/venv/
+
+# 대용량 zip 파일 무시
+backend/extracted.zip

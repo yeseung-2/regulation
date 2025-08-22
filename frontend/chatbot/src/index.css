@@ -1,0 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* App.css 또는 index.css 등에 추가 */
+.dataframe {
+  border-collapse: collapse;
+  width: 100%;
+  table-layout: auto;
+}
+.dataframe th, .dataframe td {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: left;
+  vertical-align: middle;
+}
+.dataframe td[rowspan], .dataframe th[rowspan] {
+  vertical-align: middle !important;
+}
+.dataframe td[colspan], .dataframe th[colspan] {
+  text-align: center;
+  font-weight: 500;
+}
+

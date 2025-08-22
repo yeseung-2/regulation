@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    body {
+      font-family: 'Noto Sans KR', 'Malgun Gothic', 'Apple SD Gothic Neo', 'Nanum Gothic', sans-serif;
+      line-height: 1.8;
+      font-size: 14px;
+      margin: 40px;
+      color: #222;
+    }
+
+    h1, h2, h3 {
+      text-align: center;
+      font-weight: bold;
+    }
+
+    .cover-page {
+      text-align: center;
+      margin-top: 100px;
+    }
+
+    .logo {
+      font-size: 36px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+
+    .company-name {
+      color: rgb(21, 12, 56);
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .cover-page h2 {
+      font-size: 20px;
+      color: #555;
+      margin-bottom: 40px;
+    }
+
+    .history-box {
+      border-left: 6px solid #c00;
+      padding-left: 12px;
+      margin: 20px auto;
+      width: 60%;
+    }
+
+    .history-title {
+      font-weight: bold;
+      color: white;
+      background-color: #c00;
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 4px;
+      margin-bottom: 10px;
+    }
+
+    .history-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    .history-table td {
+      border-bottom: 1px solid #ccc;
+      padding: 6px;
+    }
+
+    .date {
+      width: 40%;
+      color: #c00;
+    }
+
+    .desc {
+      color: #333;
+    }
+
+    .department {
+      text-align: right;
+      margin-top: 40px;
+      font-size: 14px;
+      color: #555;
+    }
+
+    .page-break {
+      page-break-after: always;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1.2em;
+      font-size: 13px;
+    }
+
+    th, td {
+      border: 1px solid #ccc;
+      padding: 6px 10px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th[colspan], td[colspan] {
+      text-align: center;
+      background-color: #f6f6f6;
+    }
+
+    .footer {
+      font-size: 12px;
+      text-align: right;
+      margin-top: 40px;
+      color: #777;
+    }
+  </style>
+</head>
+<body>
+  <div class="cover-page">
+
+    <h1><span class="company-name">㈜{{ company }}</span></h1>
+    <h2>{{ topic }}</h2>
+
+    <div class="history-box">
+      <div class="history-title">제정·개정 이력</div>
+      <table class="history-table">
+        {% for item in history %}
+        <tr>
+          <td class="date">{{ item.date }}</td>
+          <td class="desc">{{ item.description }}</td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+
+    <div class="department">담당부서: {{ department }}</div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <div class="content">
+    {{ content | safe }}
+  </div>
+</body>
