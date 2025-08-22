@@ -65,3 +65,4 @@ __pycache__/
 
 # 대용량 zip 파일 무시
 backend/extracted.zip
+backend/key.py
