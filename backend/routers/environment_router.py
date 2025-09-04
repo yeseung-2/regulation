@@ -5,7 +5,7 @@ from bs4 import BeautifulSoup
 from pathlib import Path
 from typing import List, Optional
 import json
-from key import key
+import os
 import re
 from langchain.chat_models import ChatOpenAI
 from langchain.schema import SystemMessage, HumanMessage
@@ -314,7 +314,7 @@ def infer_required_data(req: InferDataRequest):
         model="gpt-4o",
         temperature=0.3,
         max_tokens=1024,
-        openai_api_key=key["OPENAI_API_KEY"]
+        openai_api_key=os.getenv("OPENAI_API_KEY")
     )
 
     # 🧠 시스템 지침
@@ -437,7 +437,7 @@ def generate_draft(req: DraftRequest):
         model="gpt-4o",
         temperature=0.3,
         max_tokens=3000,
-        openai_api_key=key["OPENAI_API_KEY"]
+        openai_api_key=os.getenv("OPENAI_API_KEY")
     )
     formatted_user_tables = format_user_tables(req.inputs)
     print("📤 formatted_user_tables:\n", formatted_user_tables)
@@ -640,7 +640,7 @@ def generate_draft(req: DraftRequest):
 
 @router.post("/summarize-indicator")
 def summarize_indicator(req: InferDataRequest):
-    llm = ChatOpenAI(model="gpt-4o", temperature=0.3)
+    llm = ChatOpenAI(model="gpt-4o", temperature=0.3, openai_api_key=os.getenv("OPENAI_API_KEY"))
 
     system = SystemMessage(content="""
 너는 ESG 보고서를 작성하는 전문가야.

@@ -5,7 +5,8 @@ from fastapi.security import OAuth2PasswordBearer
 from bson import ObjectId
 from services.database import users_collection
 
-SECRET_KEY = "eri1"
+import os
+SECRET_KEY = os.getenv("JWT_SECRET_KEY", "eri1")
 ALGORITHM = "HS256"
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/login")

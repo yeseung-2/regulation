@@ -7,7 +7,8 @@ from datetime import datetime, timedelta
 from bson import ObjectId
 from services.jwt_utils import get_current_user  # ✅ 중요: 현재 사용자 추출 함수
 
-SECRET_KEY = "eri1"
+import os
+SECRET_KEY = os.getenv("JWT_SECRET_KEY", "eri1")
 ALGORITHM = "HS256"
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 

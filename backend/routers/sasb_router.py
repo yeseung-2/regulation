@@ -6,7 +6,7 @@ from pathlib import Path
 import pandas as pd
 import json
 import re
-from key import key
+import os
 from services.draft_store import save_draft, load_draft
 from langchain_community.chat_models import ChatOpenAI
 from langchain.schema import SystemMessage, HumanMessage
@@ -93,7 +93,7 @@ def parse_markdown_to_fields(markdown: str):
 
 @router.post("/infer-required-data")
 def infer_required_data(req: InferDataRequest):
-    llm = ChatOpenAI(model="gpt-4o", temperature=0.3, openai_api_key=key["OPENAI_API_KEY"])
+    llm = ChatOpenAI(model="gpt-4o", temperature=0.3, openai_api_key=os.getenv("OPENAI_API_KEY"))
 
     system = SystemMessage(content="너는 ESG 보고서 작성 지원 도우미야. 지표 설명 텍스트와 표를 참고해서 어떤 입력값이 필요한지 추론해줘. 출력은 마크다운 목록 형식이며, 각 항목에 항목명/단위/연도/설명을 포함해.")
     user = HumanMessage(content=f"[지표 ID: {req.topic}]\n\n" + "\n".join(req.chunks) + "\n\n표 내용:\n" + "\n".join(req.table_texts))
@@ -118,7 +118,7 @@ class DraftRequest(BaseModel):
 
 @router.post("/generate-draft")
 def generate_draft(req: DraftRequest):
-    llm = ChatOpenAI(model="gpt-4o", temperature=0.3, max_tokens=1500, openai_api_key=key["OPENAI_API_KEY"])
+    llm = ChatOpenAI(model="gpt-4o", temperature=0.3, max_tokens=1500, openai_api_key=os.getenv("OPENAI_API_KEY"))
 
     def format_inputs(inputs: dict) -> str:
         lines = []

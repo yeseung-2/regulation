@@ -3,7 +3,7 @@ from langchain.chains.combine_documents import create_stuff_documents_chain
 from langchain_openai import ChatOpenAI
 from langchain.schema import Document, SystemMessage, HumanMessage, AIMessage
 from services.vector_loader import load_vectorstore
-from key import key
+import os
 import json
 import re
 from pathlib import Path
@@ -40,7 +40,7 @@ def translate_to_english(text: str) -> str:
     if text in translation_cache["ko2en"]:
         return translation_cache["ko2en"][text]
 
-    llm = ChatOpenAI(model="gpt-4o", temperature=0, openai_api_key=key["OPENAI_API_KEY"])
+    llm = ChatOpenAI(model="gpt-4o", temperature=0, openai_api_key=os.getenv("OPENAI_API_KEY"))
     prompt = [
         SystemMessage(content="Translate the following Korean text to English. Respond only with the translated English."),
         HumanMessage(content=text)
@@ -57,7 +57,7 @@ def translate_to_korean(text: str) -> str:
         else:
             return cached
 
-    llm = ChatOpenAI(model="gpt-4o", temperature=0, openai_api_key=key["OPENAI_API_KEY"])
+    llm = ChatOpenAI(model="gpt-4o", temperature=0, openai_api_key=os.getenv("OPENAI_API_KEY"))
     prompt = [
         SystemMessage(content="다음 영어 문장을 자연스러운 한국어로 번역해줘. 반드시 번역된 문장만 응답해."),
         HumanMessage(content=text)
@@ -92,7 +92,7 @@ def clean_translation_cache(fallback_keywords=None):
 
 # ✅ GPT 기반 질문 분류
 def classify_query(question: str) -> str:
-    llm = ChatOpenAI(model="gpt-4o", temperature=0, openai_api_key=key["OPENAI_API_KEY"])
+    llm = ChatOpenAI(model="gpt-4o", temperature=0, openai_api_key=os.getenv("OPENAI_API_KEY"))
     system_prompt = """
 너는 ESG 문서를 다루는 AI 문서 분류기야.
 
@@ -223,7 +223,7 @@ def generate_suggested_questions(context_snippet: str, user_question: str, index
     if index_name in ["esg_templates", "esg_sample1"]:
         return []
 
-    llm = ChatOpenAI(model="gpt-4o", temperature=0, openai_api_key=key["OPENAI_API_KEY"])
+    llm = ChatOpenAI(model="gpt-4o", temperature=0, openai_api_key=os.getenv("OPENAI_API_KEY"))
     prompt = [
         SystemMessage(content="""아래는 사용자의 질문과 관련 문서 내용입니다.
 이 둘을 참고하여, 사용자가 이어서 할 수 있는 ESG 관련 실무 질문을 3개 추천해 주세요.
@@ -442,7 +442,7 @@ def ask_with_context(message: str, history: list[dict] = []) -> dict:
     ]
 
 
-    llm = ChatOpenAI(model="gpt-4o", temperature=0, openai_api_key=key["OPENAI_API_KEY"])
+    llm = ChatOpenAI(model="gpt-4o", temperature=0, openai_api_key=os.getenv("OPENAI_API_KEY"))
     output = llm.invoke(messages).content
     print("🔍 GPT 응답:", output)
 

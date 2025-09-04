@@ -7,7 +7,7 @@ from langchain.chat_models import ChatOpenAI
 from langchain.schema import SystemMessage, HumanMessage
 import re
 from dotenv import load_dotenv
-from key import key
+import os
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.chat_models import ChatOpenAI
 from difflib import SequenceMatcher
@@ -37,7 +37,7 @@ def call_hyperclova_llm(system_msg: SystemMessage, human_msg: HumanMessage) -> s
     prompt = f"{system_msg.content.strip()}\n\n{human_msg.content.strip()}"
 
     headers = {
-        "Authorization": f"Bearer {key['HUGGINGFACE_API_TOKEN']}",
+                    "Authorization": f"Bearer {os.getenv('HUGGINGFACE_API_TOKEN')}",
         "Content-Type": "application/json"
     }
 
@@ -112,7 +112,7 @@ def generate_template(req: TemplateRequest):
         model="gpt-4o",
         temperature=0.2,
         max_tokens=2048,
-        openai_api_key=key["OPENAI_API_KEY"]
+        openai_api_key=os.getenv("OPENAI_API_KEY")
     )
     system_msg = SystemMessage(content=f"""\
 너는 ESG 규정안 문서를 정돈하는 도우미야.

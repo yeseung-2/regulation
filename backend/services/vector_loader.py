@@ -1,10 +1,10 @@
 from langchain_community.vectorstores import FAISS
 from langchain_openai import OpenAIEmbeddings
-from key import key
+import os
 from pathlib import Path
 
 # ✅ 임베딩 객체 생성
-embedding = OpenAIEmbeddings(openai_api_key=key["OPENAI_API_KEY"])
+    embedding = OpenAIEmbeddings(openai_api_key=os.getenv("OPENAI_API_KEY"))
 
 def load_vectorstore(index_name: str):
     path = Path(f"vectorstores/{index_name}")
