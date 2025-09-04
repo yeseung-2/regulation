@@ -1,12 +1,36 @@
-# React + Vite
+# Regulation Chatbot Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 개발 환경 설정
 
-Currently, two official plugins are available:
+```bash
+# 의존성 설치
+npm install
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+# 개발 서버 실행
+npm run dev
 
-## Expanding the ESLint configuration
+# 빌드
+npm run build
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+# 빌드 결과 미리보기
+npm run preview
+```
+
+## Vercel 배포
+
+이 프로젝트는 Vercel에 최적화되어 있습니다.
+
+### 배포 전 확인사항:
+1. `vercel.json` 파일이 프로젝트 루트에 있는지 확인
+2. `package.json`의 빌드 스크립트가 올바른지 확인
+3. 모든 의존성이 설치되어 있는지 확인
+
+### 배포 후 404 에러 해결:
+- `vercel.json`의 rewrites 설정이 SPA 라우팅을 처리합니다
+- 모든 경로가 `index.html`로 리다이렉트되어 React Router가 작동합니다
+
+## 주요 기능
+- ESG 지표 관리
+- 채팅 기능
+- 템플릿 관리
+- 사용자 인증

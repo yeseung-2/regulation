@@ -28,6 +28,9 @@ dist-ssr
 
 # JSON 결과물(예: LangChain 등에서 생성)
 *.json
+!vercel.json
+!package.json
+!package-lock.json
 
 # 파이썬 캐시
 __pycache__/
