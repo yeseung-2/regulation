@@ -60,6 +60,9 @@ __pycache__/
 /frontend/.next/
 *.log
 
+# 벡터 데이터베이스 무시
+/backend/vectorstores/
+
 # backend 관련 무시
 /backend/__pycache__/
 /backend/*.pyc

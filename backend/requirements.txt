@@ -3,7 +3,7 @@ fastapi==0.115.9
 uvicorn[standard]==0.27.1
 python-dotenv==1.0.0
 python-multipart==0.0.6
-pydantic==2.5.0
+pydantic>=2.7.4,<3.0.0
 
 # 데이터베이스
 sqlalchemy==2.0.23
@@ -39,14 +39,12 @@ langchain-core==0.3.63
 langchain-openai==0.3.19
 openai==1.87.0
 
-# 벡터 데이터베이스
-chromadb==1.0.12
-faiss-cpu==1.11.0
+# Qdrant 벡터 데이터베이스
+qdrant-client==1.7.0
 
 # 텍스트 처리
 markdown==3.5.1
 jinja2==3.1.6
-python-multipart==0.0.6
 
 # 유틸리티
 python-dateutil==2.9.0.post0
