@@ -6,7 +6,7 @@ const config = {
   },
   // 프로덕션 환경 (Vercel 배포)
   production: {
-    API_BASE_URL: 'https://regulation-eight.vercel.app/api' // 또는 실제 백엔드 URL
+    API_BASE_URL: 'https://regulation-production.up.railway.app' // Railway 백엔드 URL
   }
 };
 

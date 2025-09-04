@@ -29,6 +29,12 @@ langchain-core==0.3.63
 langchain-openai==0.3.19
 openai==1.87.0
 
+# 추가 AI 패키지
+sentence-transformers==2.2.2
+pandas==2.1.4
+weasyprint==60.2
+email-validator==2.1.0
+
 # 벡터 데이터베이스 (Qdrant만)
 qdrant-client==1.7.0
 
