@@ -31,6 +31,7 @@ dist-ssr
 !vercel.json
 !package.json
 !package-lock.json
+!.npmrc
 
 # 파이썬 캐시
 __pycache__/

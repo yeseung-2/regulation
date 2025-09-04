@@ -5,7 +5,8 @@
       "destination": "/index.html"
     }
   ],
-  "buildCommand": "npm run build",
-  "outputDirectory": "dist",
-  "framework": "vite"
+  "buildCommand": "cd frontend/chatbot && npm ci && npm run build",
+  "outputDirectory": "frontend/chatbot/dist",
+  "framework": "vite",
+  "installCommand": "cd frontend/chatbot && npm ci"
 }
