@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from 'remark-gfm';
+import { API_BASE_URL } from "../config";
 
 const RequiredDataInput = ({ fields, chunks, tableTexts, tableInputs, setTableInputs, draft, setDraft }) => {
   const [inputs, setInputs] = useState({});
@@ -99,7 +100,7 @@ const RequiredDataInput = ({ fields, chunks, tableTexts, tableInputs, setTableIn
 useEffect(() => {
   const fetchDraft = async () => {
     try {
-      const res = await fetch(`http://localhost:8000/environment/load-draft?topic=${topicId}&company=${company}`);
+              const res = await fetch(`${API_BASE_URL}/environment/load-draft?topic=${topicId}&company=${company}`);
       const data = await res.json();
       setDraft(data.draft || "");
     } catch (err) {
@@ -109,7 +110,7 @@ useEffect(() => {
 
   const fetchInputs = async () => {
     try {
-      const res = await fetch(`http://localhost:8000/environment/load-inputs?topic=${topicId}&company=${company}`);
+              const res = await fetch(`${API_BASE_URL}/environment/load-inputs?topic=${topicId}&company=${company}`);
       const data = await res.json();
       const saved = data.inputs || {};
 
@@ -466,7 +467,7 @@ useEffect(() => {
             };
 
             try {
-              await fetch("http://localhost:8000/environment/save-inputs", {
+              await fetch(`${API_BASE_URL}/environment/save-inputs`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(payload),
@@ -518,7 +519,7 @@ useEffect(() => {
 
           // 4) 전송 시도
           try {
-              const res = await fetch("http://localhost:8000/environment/generate-draft", {
+              const res = await fetch(`${API_BASE_URL}/environment/generate-draft`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(payload),

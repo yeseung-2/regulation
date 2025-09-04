@@ -4,6 +4,7 @@ import ChatPopup from "./components/ChatPopup";
 import botImage from "./assets/chatbot_image.png";
 import userImage from "./assets/user_image.png";
 import axios from "axios";
+import { API_BASE_URL } from "./config";
 
 function ChatPage() {
   const [msg, setMsg] = useState("");
@@ -17,7 +18,7 @@ function ChatPage() {
     setMsg("");
 
     try {
-      const res = await axios.post("http://localhost:8000/chat/rag", {
+      const res = await axios.post(`${API_BASE_URL}/chat/rag`, {
         message: userMsg,
       });
 

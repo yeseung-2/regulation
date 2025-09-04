@@ -5,6 +5,7 @@ import RequiredDataInput from "./components/RequiredDataInput";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { useRef } from "react";
+import { API_BASE_URL } from "./config";
 
 // ✅ 표 입력 컴포넌트
 const PageTablesRenderer = ({ page, tableInputs, setTableInputs }) => {
@@ -171,7 +172,7 @@ const IndicatorWritePage = () => {
       try {
         setLoadingFields(true);
 
-        const fetchRes = await axios.post("http://localhost:8000/environment/fetch-data", {
+        const fetchRes = await axios.post(`${API_BASE_URL}/environment/fetch-data`, {
           topic: indicatorId,
           company: "테스트회사",
           department: "",
@@ -185,7 +186,7 @@ const IndicatorWritePage = () => {
         const meta = extractIndicatorMeta(fetchRes.data.chunks || []);
         setIndicatorMeta(meta);
 
-        const inferRes = await axios.post("http://localhost:8000/environment/infer-required-data", {
+        const inferRes = await axios.post(`${API_BASE_URL}/environment/infer-required-data`, {
           topic: indicatorId,
           chunks: fetchRes.data.chunks || [],
           table_texts: fetchRes.data.table_texts?.map((html) => {
@@ -199,7 +200,7 @@ const IndicatorWritePage = () => {
           setParsedFields(inferRes.data.required_fields);
         }
 
-        const summaryRes = await axios.post("http://localhost:8000/environment/summarize-indicator", {
+        const summaryRes = await axios.post(`${API_BASE_URL}/environment/summarize-indicator`, {
           topic: indicatorId,
           chunks: fetchRes.data.chunks || [],
           table_texts: fetchRes.data.table_texts || [],
@@ -207,7 +208,7 @@ const IndicatorWritePage = () => {
 
         setSummary(summaryRes.data.summary);
 
-        const draftRes = await axios.get(`http://localhost:8000/environment/load-draft?topic=${indicatorId}&company=테스트회사`);
+        const draftRes = await axios.get(`${API_BASE_URL}/environment/load-draft?topic=${indicatorId}&company=테스트회사`);
         setDraft(draftRes.data.draft || "");
       } catch (err) {
         console.error("❌ 데이터 로딩 실패:", err);
@@ -218,7 +219,7 @@ const IndicatorWritePage = () => {
         const handleSaveDraft = async () => {
         try {
           const res = await axios.post(
-            `http://localhost:8000/environment/save-draft/${indicatorId}`,
+            `${API_BASE_URL}/environment/save-draft/${indicatorId}`,
             {
               company: "테스트회사",   // 실제 로그인된 회사명으로 바꿔주세요
               draft: draftText       // textarea 에서 입력받은 값
@@ -317,7 +318,7 @@ const IndicatorWritePage = () => {
                 const html = editorRef.current?.getEditor()?.root.innerHTML;
                 setDraft(html);
                 try {
-                  await fetch("http://localhost:8000/environment/save-draft", {
+                  await fetch(`${API_BASE_URL}/environment/save-draft`, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ topic: indicatorId, company: "테스트회사", draft: html }),
@@ -336,7 +337,7 @@ const IndicatorWritePage = () => {
               onClick={async () => {
                 if (!confirm("임시 저장된 초안을 정말 삭제하시겠습니까?")) return;
                 try {
-                  await fetch("http://localhost:8000/environment/delete-draft", {
+                  await fetch(`${API_BASE_URL}/environment/delete-draft`, {
                     method: "DELETE",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ topic: indicatorId, company: "테스트회사" }),
