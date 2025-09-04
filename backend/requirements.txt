@@ -1,35 +1,41 @@
+# FastAPI 및 웹 프레임워크
 fastapi==0.115.9
 uvicorn[standard]==0.27.1
 python-dotenv==1.0.0
 python-multipart==0.0.6
 pydantic>=2.7.4,<3.0.0
-sqlalchemy==2.0.23
-psycopg2-binary==2.9.9
-alembic==1.13.1
+
+# 데이터베이스
+pymongo==4.6.1
+motor==3.3.2
+
+# 인증 및 보안
 python-jose[cryptography]==3.3.0
 passlib[bcrypt]==1.7.4
+cryptography==45.0.4
+
+# HTTP 및 API
 requests==2.31.0
 aiofiles==24.1.0
-jinja2==3.1.6
-markdown==3.5.1
-pymongo==4.6.1
+
+# 웹 스크래핑 및 파싱
+beautifulsoup4==4.13.4
+lxml==5.4.0
+
+# AI 및 LangChain (핵심만)
 langchain==0.3.25
-langchain-openai==0.3.19
 langchain-community==0.3.24
+langchain-core==0.3.63
+langchain-openai==0.3.19
 openai==1.87.0
+
+# 벡터 데이터베이스
 qdrant-client==1.7.0
-camelot-py==1.0.0
-pypdf>=4.0,<6.0
-pdfplumber==0.11.7
-pdf2image==1.17.0
-pymupdf==1.26.1
-opencv-python==4.11.0.86
-pytesseract==0.3.13
-openpyxl==3.1.5
-pandas==2.3.0
-numpy==2.2.6
-scikit-learn==1.6.1
-sentence-transformers==4.1.0
-transformers==4.52.4
-torch==2.7.1
-chromadb==1.0.12
+
+# 텍스트 처리
+markdown==3.5.1
+jinja2==3.1.6
+
+# 유틸리티
+python-dateutil==2.9.0.post0
+pytz==2025.2
