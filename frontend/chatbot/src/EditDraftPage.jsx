@@ -1,8 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
 import axios from "axios";
 import { useSearchParams } from "react-router-dom";
-import { Editor } from "@toast-ui/react-editor";
-import "@toast-ui/editor/dist/toastui-editor.css";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 import Header from "./components/Header";
 import { useNavigate } from "react-router-dom";
 
@@ -42,7 +42,7 @@ function EditDraftPage() {
   }, [userId, topicFromUrl]);
 
   const handleApply = () => {
-    const edited = editorRef.current.getInstance().getHTML();
+    const edited = editorRef.current.getEditor().root.innerHTML;
     setFinalResult(edited);
   };
 
@@ -207,14 +207,22 @@ function EditDraftPage() {
 
       <h2 className="text-lg font-bold mb-3 mt-10">✏️ 규정안 수정</h2>
         {finalResult && (
-        <Editor
+        <ReactQuill
             key={finalResult}  // ✅ 이게 핵심
             ref={editorRef}
-            initialValue={finalResult}
-            previewStyle="vertical"
-            height="500px"
-            initialEditType="wysiwyg"
-            useCommandShortcut={true}
+            value={finalResult}
+            onChange={setFinalResult}
+            style={{ height: "500px" }}
+            modules={{
+              toolbar: [
+                [{ 'header': [1, 2, 3, false] }],
+                ['bold', 'italic', 'underline', 'strike'],
+                [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                [{ 'color': [] }, { 'background': [] }],
+                ['link', 'image'],
+                ['clean']
+              ]
+            }}
         />
         )}
       <div className="flex gap-3 mt-4">

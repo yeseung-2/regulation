@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import RequiredDataInput from "./components/RequiredDataInput";
-import { Editor } from "@toast-ui/react-editor";
-import "@toast-ui/editor/dist/toastui-editor.css";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 import { useRef } from "react";
 
 // ✅ 표 입력 컴포넌트
@@ -293,20 +293,28 @@ const IndicatorWritePage = () => {
       {draft && (
         <div className="mt-10">
           <h2 className="text-lg font-bold mb-3">✏️ 보고서 수정</h2>
-          <Editor
+          <ReactQuill
             ref={editorRef}
-            initialValue={draft}
-            previewStyle="vertical"
-            height="800px"
-            initialEditType="wysiwyg"
-            useCommandShortcut={true}
+            value={draft}
+            onChange={setDraft}
+            style={{ height: "800px" }}
+            modules={{
+              toolbar: [
+                [{ 'header': [1, 2, 3, false] }],
+                ['bold', 'italic', 'underline', 'strike'],
+                [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                [{ 'color': [] }, { 'background': [] }],
+                ['link', 'image'],
+                ['clean']
+              ]
+            }}
           />
 
           <div className="mt-4 flex space-x-2">
             <button
               className="px-4 py-2 bg-green-600 text-white rounded text-sm hover:bg-green-700"
               onClick={async () => {
-                const html = editorRef.current?.getInstance()?.getHTML();
+                const html = editorRef.current?.getEditor()?.root.innerHTML;
                 setDraft(html);
                 try {
                   await fetch("http://localhost:8000/environment/save-draft", {

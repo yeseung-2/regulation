@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import sasbIndustries from "/src/assets/sasb_industries_91.json";
+// 임시로 빈 배열 사용 (실제 데이터는 나중에 추가)
+const sasbIndustries = [];
 
 export default function IndustrySearchInput({ value, onSelect }) {
   const [query, setQuery] = useState("");

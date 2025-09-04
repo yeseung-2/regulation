@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import axios from "axios";
-import { Editor } from "@toast-ui/react-editor";
-import "@toast-ui/editor/dist/toastui-editor.css";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 import Header from "./components/Header";
 
 const templateOptions = [
@@ -57,7 +57,7 @@ function ESGTemplatesPage() {
   };
 
   const handleApply = () => {
-    const edited = editorRef.current.getInstance().getHTML();
+    const edited = editorRef.current.getEditor().root.innerHTML;
     setFinalResult(edited);
   };
 
@@ -233,13 +233,21 @@ const handleSaveDraft = async () => {
       {rawResult && (
         <div className="mt-10">
           <h2 className="text-lg font-bold mb-3">✏️ 규정안 수정</h2>
-          <Editor
+          <ReactQuill
             ref={editorRef}
-            initialValue={rawResult}
-            previewStyle="vertical"
-            height="500px"
-            initialEditType="wysiwyg"
-            useCommandShortcut={true}
+            value={rawResult}
+            onChange={setRawResult}
+            style={{ height: "500px" }}
+            modules={{
+              toolbar: [
+                [{ 'header': [1, 2, 3, false] }],
+                ['bold', 'italic', 'underline', 'strike'],
+                [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                [{ 'color': [] }, { 'background': [] }],
+                ['link', 'image'],
+                ['clean']
+              ]
+            }}
           />
           <button
             onClick={handleApply}
